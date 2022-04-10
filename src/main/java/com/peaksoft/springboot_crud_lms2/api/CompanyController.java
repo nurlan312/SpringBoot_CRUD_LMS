@@ -1,6 +1,7 @@
 package com.peaksoft.springboot_crud_lms2.api;
 
 import com.peaksoft.springboot_crud_lms2.model.Company;
+import com.peaksoft.springboot_crud_lms2.model.Course;
 import com.peaksoft.springboot_crud_lms2.service.company.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController @RequiredArgsConstructor @RequestMapping("api/company")
 public class CompanyController {
@@ -16,9 +16,9 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping("/create")
-    public ResponseEntity createCompany(@RequestBody Company company) {
+    public ResponseEntity createCompany(@RequestBody Company company, Course course) {
         try {
-            companyService.saveCompany(company);
+            companyService.saveCompany(company, course);
             return ResponseEntity.ok("Company successfully save: \n" + company);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error create method");
@@ -26,10 +26,9 @@ public class CompanyController {
     }
 
     @PutMapping("/update/{id}")
-    public Company updateCompany(@RequestBody Company company, @PathVariable Long id) {
+    public ResponseEntity updateCompany(@RequestBody Company company, @PathVariable Long id) {
             Company company1 = companyService.getByIdCompany(id);
-            companyService.updateCompany(company, id);
-            return companyService.saveCompany(company1);
+            return ResponseEntity.ok(companyService.updateCompany(company, id));
     }
 
 //    @GetMapping("/getById/{id}")

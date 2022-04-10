@@ -1,11 +1,15 @@
 package com.peaksoft.springboot_crud_lms2.service.company;
 
 import com.peaksoft.springboot_crud_lms2.model.Company;
+import com.peaksoft.springboot_crud_lms2.model.Course;
 import com.peaksoft.springboot_crud_lms2.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.zip.CheckedOutputStream;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 @Service @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
@@ -13,7 +17,7 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository repository;
 
     @Override
-    public Company saveCompany(Company company) {
+    public Company saveCompany(Company company, Course course) {
         return repository.save(company);
     }
 
@@ -24,7 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getByIdCompany(Long id) {
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     @Override

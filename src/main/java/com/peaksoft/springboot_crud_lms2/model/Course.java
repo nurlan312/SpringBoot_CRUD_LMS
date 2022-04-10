@@ -15,4 +15,8 @@ public class Course {
     private Long id;
     private String courseName;
     private int duration;
+
+    @ManyToOne
+    @JoinColumn(name = "companyId")
+    private Company company;
 }

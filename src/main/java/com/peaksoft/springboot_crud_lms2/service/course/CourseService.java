@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface CourseService {
 
-    Course createCourse(Course course);
+    Course createCourse(Course course, Long companyId);
 
     List<Course> getAllCourses();
 
     Course getByIdCourse(Long id);
 
-    void updateCourse(Course course, Long id);
+    Course updateCourse(Course course, Long id);
 
     void deleteCourse(Long id);
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.convert.DataSizeUnit;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity @Table @Data @AllArgsConstructor @NoArgsConstructor
 public class Company {
@@ -16,4 +17,7 @@ public class Company {
     private Long id;
     private String companyName;
     private String locatedCountry;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
+    private List<Course> courses;
 }
